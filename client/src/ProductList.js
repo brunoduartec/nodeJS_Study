@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom'
 
 import CreateProductForm from './CreateProductForm';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 export default class ProductList extends Component {
     constructor() {
         super();
@@ -20,20 +27,20 @@ export default class ProductList extends Component {
             }).then(data => {
                 let response = data.map((product) => {
                     return (
-                        <tr onclick="window.location='#';">
-                            <td>
+                        <TableRow onclick="window.location='#';">
+                            <TableCell>
                                 <img src={product.image_name} height="42" width="42" />
-                            </td>
-                            <td>
+                            </TableCell>
+                            <TableCell>
                                 {product.product_name}
-                            </td>
-                            <td>
+                            </TableCell>
+                            <TableCell>
                                 {product.product_price}
-                            </td>
-                            <td>
+                            </TableCell>
+                            <TableCell>
                                 <Link to={`/detail/${product._id}`}>detail</Link>
-                            </td>
-                        </tr>
+                            </TableCell>
+                        </TableRow>
                     )
                 })
                 this.setState({ response: response });
@@ -42,17 +49,21 @@ export default class ProductList extends Component {
 
     render() {
         return (
-            <div>
-                <table>
-                    <tr>
-                        <td>IMAGE</td>
-                        <td>NAME</td>
-                        <td>PRICE</td>
-                    </tr>
-                    {this.state.response}
-                </table>
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>IMAGE</TableCell>
+                            <TableCell>NAME</TableCell>
+                            <TableCell>PRICE</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.response}
+                    </TableBody>
+                </Table>
                 <CreateProductForm />
-            </div>
+            </Paper>
         );
     }
 }

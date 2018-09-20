@@ -4,6 +4,13 @@ import './index.css';
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 const initialstate = {
     image_name: '',
     product_name: '',
@@ -74,16 +81,16 @@ export default class CreateProductForm extends Component {
 
     render() {
         return (
-            <div className="CreateProductForm">
+            <Paper>
                 <ValidatorForm
                     ref="form"
                     onSubmit={this.handleSubmit}
                 >
                     <h2>Create Item</h2>
-                    <table>
-                        <tr>
-                            <td><span class="text">Name:</span></td>
-                            <td>
+                    <Table>
+                        <TableRow>
+                            <TableCell><span class="text">Name:</span></TableCell>
+                            <TableCell>
                                 <TextValidator
                                     name="product_name"
                                     value={this.state.product_name}
@@ -96,11 +103,11 @@ export default class CreateProductForm extends Component {
                                     validators={['required']}
                                 />
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="text">Price:</span></td>
-                            <td>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell><span class="text">Price:</span></TableCell>
+                            <TableCell>
                                 <TextValidator
                                     name="product_price"
                                     value={this.state.product_price}
@@ -112,11 +119,11 @@ export default class CreateProductForm extends Component {
                                     floatingLabelFixed
                                     validators={['isPriceValid']}
                                 />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="text">Image:</span></td>
-                            <td>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell><span class="text">Image:</span></TableCell>
+                            <TableCell>
 
                                 <TextValidator
                                     name="image_name"
@@ -129,11 +136,11 @@ export default class CreateProductForm extends Component {
                                     floatingLabelFixed
                                     validators={['required']}
                                 />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="text">Description:</span></td>
-                            <td>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell><span class="text">Description:</span></TableCell>
+                            <TableCell>
                                 <TextValidator
                                     name="product_description"
                                     value={this.state.product_description}
@@ -145,10 +152,10 @@ export default class CreateProductForm extends Component {
                                     floatingLabelFixed
                                     validators={['required']}
                                 />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
                                 <Button
                                     variant="contained" color="primary"
                                     raised
@@ -161,11 +168,11 @@ export default class CreateProductForm extends Component {
                                     }
                                 </Button>
 
-                            </td>
-                        </tr>
-                    </table>
+                            </TableCell>
+                        </TableRow>
+                    </Table>
                 </ValidatorForm>
-            </div>
+            </Paper>
         );
     }
 

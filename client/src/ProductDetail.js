@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import "./App.css";
 import UpdateProductForm from './UpdateProductForm';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 export default class ProductDetail extends Component {
     constructor() {
         super();
@@ -19,17 +26,17 @@ export default class ProductDetail extends Component {
                 let response = data.map((product) => {
                     this.setState({ product: product });
                     return (
-                        <tr>
-                            <td>
+                        <TableRow>
+                            <TableCell>
                                 <img src={product.image_name} height="42" width="42" />
-                            </td>
-                            <td>
+                            </TableCell>
+                            <TableCell>
                                 {product.product_name}
-                            </td>
-                            <td>
+                            </TableCell>
+                            <TableCell>
                                 {product.product_price}
-                            </td>
-                        </tr>
+                            </TableCell>
+                        </TableRow>
                     )
                 })
                 this.setState({ response: response });
@@ -38,20 +45,24 @@ export default class ProductDetail extends Component {
 
     render() {
         return (
-            <div class="content">
-                <table>
-                    <tr>
-                        <td>IMAGE</td>
-                        <td>NAME</td>
-                        <td>PRICE</td>
-                    </tr>
-                    {this.state.response}
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>IMAGE</TableCell>
+                            <TableCell>NAME</TableCell>
+                            <TableCell>PRICE</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.response}
+                    </TableBody>
                     <UpdateProductForm
                         id={this.props.match.params.id}
                         image_name={this.state.product.image_name}
                     />
-                </table>
-            </div>
+                </Table>
+            </Paper>
         );
     }
 }
