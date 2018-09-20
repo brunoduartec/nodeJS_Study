@@ -23,7 +23,8 @@ exports.product_detail_create = function (req, res) {
     var productInstance = new Product({
         image_name: jsonParsed.image_name,
         product_name: jsonParsed.product_name,
-        product_price: jsonParsed.product_price
+        product_price: jsonParsed.product_price,
+        product_description: jsonParsed.product_description,
     });
 
     // Save the new model instance, passing a callback
@@ -37,17 +38,16 @@ exports.product_detail_create = function (req, res) {
 exports.product_detail_update = function (req, res) {
     var jsonParsed = req.body;
 
-    Product.find({ _id: jsonParsed._id }, function (err, product) {
+    console.log("VLAUS" + jsonParsed.image_name);
 
-        product.image_name = jsonParsed.image_name;
-        product.product_name = jsonParsed.product_name;
-        product.product_price = jsonParsed.product_price;
-
-        product.save(function (err) {
-            if (err) return handleError(err);
-            // saved!
-        });
-    })
+    Product.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        (err, todo) => {
+            // Handle any possible database errors
+            if (err) return res.status(500).send(err);
+            return res.send(todo);
+        })
 }
 
 

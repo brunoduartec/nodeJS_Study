@@ -3,6 +3,8 @@ import "./index.css";
 
 import { Link } from 'react-router-dom'
 
+import CreateProductForm from './CreateProductForm';
+
 export default class ProductList extends Component {
     constructor() {
         super();
@@ -40,14 +42,17 @@ export default class ProductList extends Component {
 
     render() {
         return (
-            <table>
-                <tr>
-                    <td>IMAGE</td>
-                    <td>NAME</td>
-                    <td>PRICE</td>
-                </tr>
-                {this.state.response}
-            </table>
+            <div>
+                <table>
+                    <tr>
+                        <td>IMAGE</td>
+                        <td>NAME</td>
+                        <td>PRICE</td>
+                    </tr>
+                    {this.state.response}
+                </table>
+                <CreateProductForm />
+            </div>
         );
     }
 }

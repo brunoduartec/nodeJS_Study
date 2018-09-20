@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import "./index.css";
+import UpdateProductForm from './UpdateProductForm';
 
 export default class ProductDetail extends Component {
     constructor() {
         super();
         this.state = {
             response: [],
+            product: [],
         };
     }
 
@@ -15,6 +17,7 @@ export default class ProductDetail extends Component {
                 return results.json();
             }).then(data => {
                 let response = data.map((product) => {
+                    this.setState({ product: product });
                     return (
                         <tr>
                             <td>
@@ -42,6 +45,9 @@ export default class ProductDetail extends Component {
                     <td>PRICE</td>
                 </tr>
                 {this.state.response}
+                <UpdateProductForm
+                    id={this.props.match.params.id}
+                />
             </table>
         );
     }
