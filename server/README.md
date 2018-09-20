@@ -1,4 +1,5 @@
 To run the client project you should use the command 
+
   npm run devstart
 
 It is important to run the server previous to the client
