@@ -17,17 +17,21 @@ export default class UpdateProductForm extends Component {
     }
 
     componentDidMount() {
-        fetch(`/products/` + this.props.id)
+        fetch(`/product/` + this.props.id, {
+            method: "get",
+        })
             .then(results => {
                 return results.json();
             }).then(data => {
-                const initialstate = {
-                    image_name: data.image_name || '',
-                    product_name: data.product_name || '',
-                    product_price: data.product_price || '',
-                    product_description: data.product_description || '',
-                };
-                this.setState(initialstate);
+                let response = data.map((product) => {
+                    const initialstate = {
+                        image_name: product.image_name || '',
+                        product_name: product.product_name || '',
+                        product_price: product.product_price || '',
+                        product_description: product.product_description || '',
+                    };
+                    this.setState(initialstate);
+                });
             })
     }
 
@@ -68,7 +72,6 @@ export default class UpdateProductForm extends Component {
                     onSubmit={this.handleSubmit}>
                     <h2>Update Item</h2>
                     <table>
-                        <p>{this.props.id}</p>
                         <tr>
                             <td><span class="text">Name:</span></td>
                             <td><input type="text" name="product_name" value={this.state.product_name} onChange={this.handleChange} /> </td>
@@ -99,6 +102,6 @@ export default class UpdateProductForm extends Component {
 }
 
 UpdateProductForm.defaultProps = {
-    action: '/products/',
+    action: '/product/',
     method: 'put'
 };

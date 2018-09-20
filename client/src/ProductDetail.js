@@ -12,7 +12,7 @@ export default class ProductDetail extends Component {
     }
 
     componentDidMount() {
-        fetch(`/products/` + this.props.match.params.id)
+        fetch(`/product/` + this.props.match.params.id)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -47,6 +47,7 @@ export default class ProductDetail extends Component {
                 {this.state.response}
                 <UpdateProductForm
                     id={this.props.match.params.id}
+                    image_name={this.state.product.image_name}
                 />
             </table>
         );
