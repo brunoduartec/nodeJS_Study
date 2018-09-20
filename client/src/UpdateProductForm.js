@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './index.css';
 
+import Button from "@material-ui/core/Button";
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
 export default class UpdateProductForm extends Component {
     constructor(props, context) {
         super(props, context);
@@ -17,6 +20,12 @@ export default class UpdateProductForm extends Component {
     }
 
     componentDidMount() {
+        ValidatorForm.addValidationRule('isPriceValid', (value) => {
+            if (value < 0) {
+                return false;
+            }
+            return true;
+        });
         fetch(`/product/` + this.props.id, {
             method: "get",
         })
@@ -65,36 +74,96 @@ export default class UpdateProductForm extends Component {
 
         return (
             <div className="UpdateProductForm">
-                <form
-                    id="main-login"
-                    action={this.props.action}
-                    method={this.props.method}
-                    onSubmit={this.handleSubmit}>
+                <ValidatorForm
+                    ref="form"
+                    onSubmit={this.handleSubmit}
+                >
                     <h2>Update Item</h2>
                     <table>
                         <tr>
                             <td><span class="text">Name:</span></td>
-                            <td><input type="text" name="product_name" value={this.state.product_name} onChange={this.handleChange} /> </td>
+                            <td>
+                                <TextValidator
+                                    name="product_name"
+                                    value={this.state.product_name}
+                                    hintText="Name"
+                                    floatingLabelText="Name"
+                                    onChange={this.handleChange}
+                                    errorMessages={['this field is required']}
+                                    variant="filled"
+                                    floatingLabelFixed
+                                    validators={['required']}
+                                />
+
+                            </td>
                         </tr>
                         <tr>
                             <td><span class="text">Price:</span></td>
-                            <td><input type="text" name="product_price" value={this.state.product_price} onChange={this.handleChange} /> </td>
+                            <td>
+                                <TextValidator
+                                    name="product_price"
+                                    value={this.state.product_price}
+                                    hintText="Price"
+                                    floatingLabelText="Price"
+                                    onChange={this.handleChange}
+                                    errorMessages={['this field must be positive']}
+                                    variant="filled"
+                                    floatingLabelFixed
+                                    validators={['isPriceValid']}
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td><span class="text">Image:</span></td>
-                            <td><input type="text" name="image_name" value={this.state.image_name} onChange={this.handleChange} /> </td>
+                            <td>
+
+                                <TextValidator
+                                    name="image_name"
+                                    value={this.state.image_name}
+                                    hintText="Image Name"
+                                    floatingLabelText="Image Name"
+                                    onChange={this.handleChange}
+                                    errorMessages={['this field is required']}
+                                    variant="filled"
+                                    floatingLabelFixed
+                                    validators={['required']}
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td><span class="text">Description:</span></td>
-                            <td><input type="text" name="product_description" value={this.state.product_description} onChange={this.handleChange} /> </td>
+                            <td>
+                                <TextValidator
+                                    name="product_description"
+                                    value={this.state.product_description}
+                                    hintText="Description"
+                                    floatingLabelText="Description"
+                                    onChange={this.handleChange}
+                                    errorMessages={['this field is required']}
+                                    variant="filled"
+                                    floatingLabelFixed
+                                    validators={['required']}
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td>
-                                <button>Submit</button>
+                                <Button
+                                    variant="contained" color="primary"
+                                    raised
+                                    type="submit"
+                                    disabled={this.state.submitted}
+                                >
+                                    {
+                                        (this.state.submitted && 'Your form is submitted!')
+                                        || (!this.state.submitted && 'Submit')
+                                    }
+                                </Button>
+
                             </td>
                         </tr>
                     </table>
-                </form>
+                </ValidatorForm>
             </div>
         );
     }

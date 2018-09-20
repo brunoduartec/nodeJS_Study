@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./index.css";
+import "./App.css";
 import UpdateProductForm from './UpdateProductForm';
 
 export default class ProductDetail extends Component {
@@ -38,18 +38,20 @@ export default class ProductDetail extends Component {
 
     render() {
         return (
-            <table>
-                <tr>
-                    <td>IMAGE</td>
-                    <td>NAME</td>
-                    <td>PRICE</td>
-                </tr>
-                {this.state.response}
-                <UpdateProductForm
-                    id={this.props.match.params.id}
-                    image_name={this.state.product.image_name}
-                />
-            </table>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>IMAGE</td>
+                        <td>NAME</td>
+                        <td>PRICE</td>
+                    </tr>
+                    {this.state.response}
+                    <UpdateProductForm
+                        id={this.props.match.params.id}
+                        image_name={this.state.product.image_name}
+                    />
+                </table>
+            </div>
         );
     }
 }
