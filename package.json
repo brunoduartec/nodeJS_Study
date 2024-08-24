@@ -5,7 +5,7 @@
         "client": "nodemon ./client/start-client.js"
     },
     "dependencies": {
-        "nodemon": "^1.18.4"
+        "nodemon": "^3.1.4"
     },
     "devDependencies": {
         "concurrently": "^4.0.1"
