@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.1.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^3.1.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-material-ui-form-validator": "^2.0.2",
